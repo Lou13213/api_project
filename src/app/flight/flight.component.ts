@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-flight',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlightComponent implements OnInit {
 
-  constructor() { }
+  flights: any[] = [];
+  @Output() eventOut = new EventEmitter<string>()
+  isHidden: boolean = false;
+
+  constructor(private router: Router, private dataservice:DataService) { }
 
   ngOnInit(): void {
+    this.dataservice.getFlights().subscribe(data=>this.flights=data)
   }
 
 }
