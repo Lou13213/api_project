@@ -9,6 +9,7 @@ import { FlightComponent } from './flight/flight.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { AproposComponent } from './apropos/apropos.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CarouselComponent } from './carousel/carousel.component';
     FlightComponent,
     FooterComponent,
     HomeComponent,
-    CarouselComponent
+    CarouselComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,
