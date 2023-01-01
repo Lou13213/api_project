@@ -19,12 +19,15 @@ export class DataService {
 }
 
 protected obj2ArrayFlights(tab: any[]): Flight[] {
+
+console.log(tab)
   return tab.map( (el: any) => {
       const c: Flight = {
-        iata: el.iataNumber,
-        icao: el.icaoNumber,
-        flightNumber: parseInt(el.number)
+        iata: el.flight.iataNumber,
+        icao: el.flight.icaoNumber,
+        flightNumber: parseInt(el.flight.number)
       }
+
       return c
   })
 }
