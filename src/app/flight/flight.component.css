@@ -1,0 +1,33 @@
+.table{
+  width: 1000px;
+  margin: auto;
+}
+.container{
+  padding:20px;
+  background-color: #EEEEEE;
+}
+.hero{
+
+  background-color: #39B5E0;
+  padding-top:5px;
+  padding-bottom: 5px;
+}
+.formular{
+  text-align:center;
+  width: auto;
+  margin-top:50px;
+  margin-bottom:50px;
+}
+.h1{
+  color:white;
+}
+.h2{
+  color:white;
+  margin-top:-15px
+}
+.input2{
+
+  width: 280px;
+}
+
+

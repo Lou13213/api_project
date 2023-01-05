@@ -5,8 +5,10 @@
   padding-bottom: 5px;
 }
 .formular{
-
   text-align:center;
+  width: auto;
+  margin-top:50px;
+  margin-bottom:50px;
 }
 .h1{
   color:white;
@@ -15,3 +17,8 @@
   color:white;
   margin-top:-15px
 }
+.input2{
+
+  width: 280px;
+}
+
