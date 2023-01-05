@@ -1,5 +1,22 @@
 <div class="w3-padding general">
-  <div *ngFor="let flight of flights">
-{{flight.flightNumber}}
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">N° de vol</th>
+        <th scope="col">Provenance</th>
+        <th scope="col">Compagnie</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Suivi de vol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of flights">
+        <td>{{flight.flightNumber}}</td>
+        <td>{{flight.departure}}</td>
+        <td>{{flight.airline}}</td>
+        <td>{{flight.statut}}</td>
+        <td><button>Suivre le vol</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

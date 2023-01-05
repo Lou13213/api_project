@@ -13,10 +13,6 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-      this.items.push( { name: 'Accueil', display: true })
-      this.items.push( { name: 'Avec alcool', display: true })
-      this.items.push( { name: 'Sans alcool', display: true })
-      this.items.push( { name: 'Tous', display: false })
   }
 
 }

@@ -12,7 +12,7 @@ export class DataService {
 
 
   getFlights(): Observable<Flight[]> {
-    return this.http.get('https://aviation-edge.com/v2/public/flights?key=69201f-ee8fdb&limit=30').pipe(
+    return this.http.get('https://aviation-edge.com/v2/public/flights?key=69201f-ee8fdb&arrIata=NCE').pipe(
       tap(x=>console.log(x)),
         map( (data: any) => this.obj2ArrayFlights(data) )
     )
@@ -25,7 +25,10 @@ console.log(tab)
       const c: Flight = {
         iata: el.flight.iataNumber,
         icao: el.flight.icaoNumber,
-        flightNumber: parseInt(el.flight.number)
+        flightNumber: parseInt(el.flight.number),
+        statut: el.status,
+        airline: el.airline.iataCode,
+        departure: el.departure.iataCode
       }
 
       return c
