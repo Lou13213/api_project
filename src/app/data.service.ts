@@ -74,17 +74,32 @@ export class DataService {
         mergeMap((flight: any) =>
           this.http.get<any[]>('https://aviation-edge.com/v2/public/cityDatabase?key=69201f-ee8fdb&codeIataCity=' + flight.departure.iataCode).pipe(
             map((cities: any) => {
-              if (cities.length > 0) {
-              flight.nouveau = cities[0].nameCity}
+              if (cities.length > 0 && cities !== undefined) {
+              flight.newcities = cities[0].nameCity}
               else {
-                flight.nouveau = 'inconnu'}
+                //ne pas afficher la ligne si la ville n'est pas connue
+                flight.newcities = 'null'
+              }
               return flight
             })
           )
         ),
+        mergeMap((flight: any) =>
+          this.http.get<any[]>('https://aviation-edge.com/v2/public/airlineDatabase?key=69201f-ee8fdb&codeIataAirline=' + flight.airline.iataCode).pipe(
+            map((airline: any) => {
+              if (airline.length > 0) {
+              flight.newairline = airline[0].nameAirline}
+              else
+              {
+                //supprimer la ligne entière si l'airline n'est pas connue
+                flight = null
 
+              }
 
-
+              return flight
+            })
+          )
+        ),
         map( (el: any) => {
           //console.log('xx', el)
           const c: Flight = {
@@ -92,8 +107,9 @@ export class DataService {
             icao: el.flight.icaoNumber,
             flightNumber: parseInt(el.flight.number),
             statut: el.status,
-            airline: el.airline.iataCode,
-            from: el.nouveau
+            airline: el.newairline,
+            from: el.newcities,
+
           };
           return c;
         }),
