@@ -6,6 +6,7 @@ import { FlightComponent } from './flight/flight.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AproposComponent } from './apropos/apropos.component';
+import { FlightdepartureComponent } from './flightdeparture/flightdeparture.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: 'flight', component: FlightComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'apropos', component: AproposComponent},
+  { path: 'flightdeparture', component: FlightdepartureComponent},
   { path: 'footer', component: FooterComponent }
+
 
 ];
 

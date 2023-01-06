@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
-  selector: 'app-flight',
-  templateUrl: './flight.component.html',
-  styleUrls: ['./flight.component.css']
+  selector: 'app-flightdeparture',
+  templateUrl: './flightdeparture.component.html',
+  styleUrls: ['./flightdeparture.component.css']
 })
-export class FlightComponent implements OnInit {
-
+export class FlightdepartureComponent implements OnInit {
   flights: any[] = [];
   @Output() eventOut = new EventEmitter<string>()
   isHidden: boolean = false;
@@ -16,16 +15,7 @@ export class FlightComponent implements OnInit {
   constructor(private router: Router, private dataservice:DataService) { }
 
   ngOnInit(): void {
-    this.dataservice.complique().subscribe(
-      data => {
-        console.log(data)
-        this.flights=data
-      })
-  }
-  addVariableToUrl(){
-
+    this.dataservice.complique().subscribe(data=>this.flights=data)
   }
 
-  }
-
-
+}

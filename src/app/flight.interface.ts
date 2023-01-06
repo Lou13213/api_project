@@ -4,5 +4,6 @@ export interface Flight {
   flightNumber: number
   statut: string
   airline: string
-  departure?: string
+  from: string
+  to?: string
 }

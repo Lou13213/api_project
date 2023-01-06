@@ -2,12 +2,12 @@
   <div class="hero__breadcrumb">
     <section class="container2">
 <div class="h1">Live flights</div>
-<div class="h2">Arrivals</div>
+<div class="h2">Departure</div>
 </section>
 </div>
 </div>
 <form class="formular">
-  <h1><img src="assets/loupe.png" width="35" height="35">   Arriving from</h1>
+  <h1><img src="assets/loupe.png" width="35" height="35">   Departing to</h1>
   <input class="input2" formControlName="search" placeholder="flight number, destination or airline">
 </form>
 <button type="button" class="btn btn-success">Départ</button>
@@ -27,10 +27,10 @@
     <tbody>
       <tr *ngFor="let flight of flights">
         <td>{{flight.flightNumber}}</td>
-        <td>{{flight.from}}</td>
+        <td>{{flight.to}}</td>
         <td>{{flight.airline}}</td>
         <td>{{flight.statut}}</td>
-        <td><button (click)="addVariableToUrl()">Suivre le vol</button></td>
+        <td><button>Suivre le vol</button></td>
       </tr>
     </tbody>
   </table>
