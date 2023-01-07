@@ -1,7 +1,7 @@
 export interface Flight {
   iata: string
   icao: string
-  flightNumber: number
+  flightNumber: string
   statut: string
   airline: string
   from: string

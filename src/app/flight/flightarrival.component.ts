@@ -4,8 +4,8 @@ import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-flight',
-  templateUrl: './flight.component.html',
-  styleUrls: ['./flight.component.css']
+  templateUrl: './flightarrival.component.html',
+  styleUrls: ['./flightarrival.component.css']
 })
 export class FlightComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class FlightComponent implements OnInit {
   constructor(private router: Router, private dataservice:DataService) { }
 
   ngOnInit(): void {
-    this.dataservice.complique().subscribe(
+    this.dataservice.flightarrival().subscribe(
       data => {
         console.log(data)
         this.flights=data

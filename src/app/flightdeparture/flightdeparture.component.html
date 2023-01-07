@@ -29,10 +29,10 @@
     <tbody>
       <tr *ngFor="let flight of flights">
         <td>{{flight.flightNumber}}</td>
-        <td>{{flight.to}}</td>
+        <td>{{flight.from}}</td>
         <td>{{flight.airline}}</td>
         <td>{{flight.statut}}</td>
-        <td>
+        <td><button (click)="onTrackFlight(flight)">Suivre le vol</button></td>
       </tr>
     </tbody>
   </table>

@@ -17,7 +17,13 @@ export class FlightdepartureComponent implements OnInit {
   constructor(private router: Router, private dataservice:DataService) { }
 
   ngOnInit(): void {
-    this.dataservice.complique().subscribe(data=>this.flights=data)
+    this.dataservice.flightdeparture().subscribe(data=>this.flights=data)
   }
 
+  onTrackFlight(flight: any) {
+    console.log('Tracking flight', flight);
+    const url = `https://flightaware.com/live/flight/${flight.icao}`;
+    window.open(url, '_blank');
+    console.log('Finished tracking flight');
+  }
 }
