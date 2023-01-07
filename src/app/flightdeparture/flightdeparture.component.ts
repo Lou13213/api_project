@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { Flight } from '../flight.interface';
 
 @Component({
   selector: 'app-flightdeparture',
   templateUrl: './flightdeparture.component.html',
   styleUrls: ['./flightdeparture.component.css']
 })
+
 export class FlightdepartureComponent implements OnInit {
   flights: any[] = [];
   @Output() eventOut = new EventEmitter<string>()

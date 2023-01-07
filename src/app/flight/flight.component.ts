@@ -22,8 +22,11 @@ export class FlightComponent implements OnInit {
         this.flights=data
       })
   }
-  addVariableToUrl(){
-
+  onTrackFlight(flight: any) {
+    console.log('Tracking flight', flight);
+    const url = `https://flightaware.com/live/flight/${flight.icao}`;
+    window.open(url, '_blank');
+    console.log('Finished tracking flight');
   }
 
   }
