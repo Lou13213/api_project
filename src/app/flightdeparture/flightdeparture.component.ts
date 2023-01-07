@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { DataService } from '../data.service';
 import { Flight } from '../flight.interface';
 
@@ -10,14 +12,49 @@ import { Flight } from '../flight.interface';
 })
 
 export class FlightdepartureComponent implements OnInit {
-  flights: any[] = [];
+  flights: Array<Flight> = new Array<Flight>();
   @Output() eventOut = new EventEmitter<string>()
   isHidden: boolean = false;
 
-  constructor(private router: Router, private dataservice:DataService) { }
+  searchForm: UntypedFormGroup
+  searchCtrlDestination: FormControl<string>
+  searchCtrlFlightnumber: FormControl<string>
+  searchCtrlAirlines: FormControl<string>
+
+  constructor(private router: Router, private dataservice:DataService) {
+    this.searchCtrlDestination = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+    this.searchCtrlFlightnumber = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+    this.searchCtrlAirlines = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+
+  this.searchForm = new UntypedFormGroup({
+      searchDestination: this.searchCtrlDestination,
+      searchFlightnumber: this.searchCtrlFlightnumber,
+      searchAirlines: this.searchCtrlAirlines
+  })
+   }
 
   ngOnInit(): void {
     this.dataservice.flightdeparturetest().subscribe(data=>this.flights=data)
+    this.searchCtrlDestination.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsToDestination(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
+
+    this.searchCtrlFlightnumber.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsToFlightnumber(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
+
+    this.searchCtrlAirlines.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsToAirlines(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
   }
 
   onTrackFlight(flight: any) {

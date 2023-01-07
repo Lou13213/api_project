@@ -6,9 +6,11 @@
 </section>
 </div>
 </div>
-<form class="formular">
+<form class="formular" [formGroup]="searchForm">
   <h1><img src="assets/loupe.png" width="35" height="35">   Arriving from</h1>
-  <input class="input2" formControlName="search" placeholder="flight number, destination or airline">
+  <input class="input2" formControlName="searchDeparture" placeholder="Departure">
+  <input class="input2" formControlName="searchFlightnumber" placeholder="Flight Number">
+  <input class="input2" formControlName="searchAirlines" placeholder="Airlines">
 </form>
 <button type="button" class="btn btn-success">Départ</button>
 <button type="button" class="btn btn-info">Arrivées</button>

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { DataService } from '../data.service';
 import { Flight } from '../flight.interface';
 
@@ -14,16 +16,50 @@ export class FlightComponent implements OnInit {
   @Output() eventOut = new EventEmitter<string>()
   isHidden: boolean = false;
 
-  constructor(private router: Router, private dataservice:DataService) { }
+  searchForm: UntypedFormGroup
+  searchCtrlDeparture: FormControl<string>
+  searchCtrlFlightnumber: FormControl<string>
+  searchCtrlAirlines: FormControl<string>
+
+
+  constructor(private router: Router, private dataservice:DataService) {
+    this.searchCtrlDeparture = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+    this.searchCtrlFlightnumber = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+    this.searchCtrlAirlines = new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true
+    });
+
+  this.searchForm = new UntypedFormGroup({
+      searchDeparture: this.searchCtrlDeparture,
+      searchFlightnumber: this.searchCtrlFlightnumber,
+      searchAirlines: this.searchCtrlAirlines
+  })
+   }
 
   ngOnInit(): void {
-    this.dataservice.flightarrivaltest().subscribe(
-      data => {
-        console.log(data)
-        this.flights=data,
-        this.sortFlights();
-      })
+    this.dataservice.flightarrivaltest().subscribe(data=>this.flights=data)
+    this.searchCtrlDeparture.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsFromDeparture(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
+
+    this.dataservice.flightarrivaltest().subscribe(data=>this.flights=data)
+    this.searchCtrlFlightnumber.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsFromFlightnumber(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
+
+    this.dataservice.flightarrivaltest().subscribe(data=>this.flights=data)
+    this.searchCtrlAirlines.valueChanges.pipe(
+      switchMap( (value: string) =>  this.dataservice.GetFlightsFromAirlines(value))
+      ).subscribe((data: Flight[]) => this.flights=data)
   }
+
   onTrackFlight(flight: any) {
     console.log('Tracking flight', flight);
     const url = `https://flightaware.com/live/flight/${flight.icao}`;

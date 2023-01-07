@@ -245,13 +245,53 @@ export class DataService {
             terminal: el.arrival.terminal,
             estimatedTimeDeparture: el.departure.scheduledTime,
             estimatedTimeArrival: el.arrival.scheduledTime,
-
-
           };
           return c;
         }),
         toArray()
       );
+  }
+
+  GetFlightsToDestination(searchDestination : string)
+  {
+    return this.flightdeparturetest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.from.toLocaleLowerCase().indexOf(searchDestination.toLocaleLowerCase()) == 0))
+    );
+  }
+
+  GetFlightsToFlightnumber(searchFlightnumber : string)
+  {
+    return this.flightdeparturetest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.iata.toLocaleLowerCase().indexOf(searchFlightnumber.toLocaleLowerCase()) == 0))
+    );
+  }
+
+  GetFlightsToAirlines(searchAirlines : string)
+  {
+    return this.flightdeparturetest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.airline.toLocaleLowerCase().indexOf(searchAirlines.toLocaleLowerCase()) == 0))
+    );
+  }
+
+  GetFlightsFromDeparture(searchDeparture : string)
+  {
+    return this.flightarrivaltest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.from.toLocaleLowerCase().indexOf(searchDeparture.toLocaleLowerCase()) == 0))
+    );
+  }
+
+  GetFlightsFromFlightnumber(searchFlightnumber : string)
+  {
+    return this.flightarrivaltest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.iata.toLocaleLowerCase().indexOf(searchFlightnumber.toLocaleLowerCase()) == 0))
+    );
+  }
+
+  GetFlightsFromAirlines(searchAirlines : string)
+  {
+    return this.flightarrivaltest().pipe(
+      map((flights: Flight[]) => flights.filter(flight => flight.airline.toLocaleLowerCase().indexOf(searchAirlines.toLocaleLowerCase()) == 0))
+    );
   }
 }
 
