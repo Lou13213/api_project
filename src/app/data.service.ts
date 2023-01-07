@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, mergeMap, tap, of, from, toArray } from 'rxjs';
+import { map, Observable, mergeMap, tap, of, from, toArray, filter } from 'rxjs';
 import { Flight } from './flight.interface';
 
 @Injectable({
@@ -78,7 +78,7 @@ export class DataService {
               flight.newcities = cities[0].nameCity}
               else {
                 //ne pas afficher la ligne si la ville n'est pas connue
-                flight.newcities = 'null'
+                flight.newcities = 'unknown'
               }
               return flight
             })
@@ -92,14 +92,14 @@ export class DataService {
               else
               {
                 //supprimer la ligne entière si l'airline n'est pas connue
-                flight = null
-
+                flight.newairline = 'unknown'
               }
 
               return flight
             })
           )
         ),
+        filter( (el: any) => el.newcities !== 'unknown' && el.newairline !== 'unknown'),
         map( (el: any) => {
           //console.log('xx', el)
           const c: Flight = {
