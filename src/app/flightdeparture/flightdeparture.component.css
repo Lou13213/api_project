@@ -29,5 +29,11 @@
 
   width: 280px;
 }
+.active-status {
+  color: #00aaff;
+}
+.scheduled-status {
+  color: #ff6a00;
+}
 
 

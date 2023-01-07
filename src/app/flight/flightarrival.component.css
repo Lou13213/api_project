@@ -29,5 +29,12 @@
 
   width: 280px;
 }
-
-
+.landed-status {
+  color: #027d02;
+}
+.active-status {
+  color: #00aaff;
+}
+.scheduled-status {
+  color: #ff6a00;
+}

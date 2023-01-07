@@ -17,20 +17,27 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">N° de vol</th>
-        <th scope="col">Provenance</th>
-        <th scope="col">Compagnie</th>
-        <th scope="col">Statut</th>
-        <th scope="col">Suivi de vol</th>
+        <th scope="col">Flight number</th>
+        <th scope="col">From</th>
+        <th scope="col">Airline</th>
+        <th scope="col">Estimated arriving time</th>
+        <th scope="col">Terminal</th>
+        <th scope="col">Status</th>
+        <th scope="col">Live Track</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let flight of flights">
-        <td>{{flight.flightNumber}}</td>
+        <td>{{flight.iata}}</td>
         <td>{{flight.from}}</td>
         <td>{{flight.airline}}</td>
-        <td>{{flight.statut}}</td>
-        <td><button (click)="onTrackFlight(flight)">Suivre le vol</button></td>
+        <td>{{formatDate(flight.estimatedTimeArrival)}}</td>
+        <td>{{flight.terminal}}</td>
+        <td [ngClass]="{
+        'landed-status': flight.statut === 'landed',
+        'active-status': flight.statut === 'active',
+        'scheduled-status': flight.statut === 'scheduled'}">{{flight.statut}}</td>
+        <td><button (click)="onTrackFlight(flight)">Live track</button></td>
       </tr>
     </tbody>
   </table>

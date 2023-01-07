@@ -6,4 +6,7 @@ export interface Flight {
   airline: string
   from: string
   to?: string
+  terminal?: string
+  estimatedTimeArrival?: string
+  estimatedTimeDeparture?: string
 }
