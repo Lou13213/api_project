@@ -1,2 +1,8 @@
+<div class="backbutton"><button class="btnarrival" (click)="toggleFlight()">Arrivals</button>
+  <button class="btndeparture" (click)="toggleFlightDeparture()">Departure</button>
+</div>
 
+
+<app-flight *ngIf="showFlight"></app-flight>
+<app-flightdeparture *ngIf="showFlightDeparture"></app-flightdeparture>
 

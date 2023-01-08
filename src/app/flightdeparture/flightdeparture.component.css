@@ -35,5 +35,8 @@
 .scheduled-status {
   color: #ff6a00;
 }
+.cancelled-status {
+  color: #ff0000;
+}
 
 

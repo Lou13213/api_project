@@ -2,7 +2,7 @@
   <div class="hero__breadcrumb">
     <section class="container2">
 <div class="h1">Live flights</div>
-<div class="h2">Arrivals</div>
+<div class="h2">Arrivals Nice</div>
 </section>
 </div>
 </div>
@@ -12,8 +12,6 @@
   <input class="input2" formControlName="searchFlightnumber" placeholder="Flight Number">
   <input class="input2" formControlName="searchAirlines" placeholder="Airlines">
 </form>
-<button type="button" class="btn btn-success">Départ</button>
-<button type="button" class="btn btn-info">Arrivées</button>
 <div class="container">
 <div class="w3-padding general">
   <table class="table">
@@ -38,7 +36,8 @@
         <td [ngClass]="{
         'landed-status': flight.statut === 'landed',
         'active-status': flight.statut === 'active',
-        'scheduled-status': flight.statut === 'scheduled'}">{{flight.statut}}</td>
+        'scheduled-status': flight.statut === 'scheduled',
+        'cancelled-status': flight.statut === 'cancelled'}">{{flight.statut}}</td>
         <td><button (click)="onTrackFlight(flight)">Live track</button></td>
       </tr>
     </tbody>

@@ -43,7 +43,7 @@ export class FlightdepartureComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.dataservice.flightdeparturetest().subscribe(data=>this.flights=data)
+    this.dataservice.flightdeparture().subscribe(data=>this.flights=data)
     this.searchCtrlDestination.valueChanges.pipe(
       switchMap( (value: string) =>  this.dataservice.GetFlightsToDestination(value))
       ).subscribe((data: Flight[]) => this.flights=data)

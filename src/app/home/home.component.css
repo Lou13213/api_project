@@ -21,4 +21,23 @@
 
   width: 280px;
 }
+.backbutton{
+  background-color: #e0c439;
+  color: white;
+  margin: auto;
+  text-align:center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btndeparture{
+  margin-right:10px;
+  margin-left:10px;
+}
+.btnarrival{
+  margin-right:10px;
+  margin-left:10px;
+}
+
 
