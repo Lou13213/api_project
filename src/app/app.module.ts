@@ -10,7 +10,6 @@ import { BodyComponent } from './body/body.component';
 import { FlightComponent } from './flight/flightarrival.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { CarouselComponent } from './carousel/carousel.component';
 import { AproposComponent } from './apropos/apropos.component';
 import { FlightdepartureComponent } from './flightdeparture/flightdeparture.component';
 
@@ -22,7 +21,6 @@ import { FlightdepartureComponent } from './flightdeparture/flightdeparture.comp
     FlightComponent,
     FooterComponent,
     HomeComponent,
-    CarouselComponent,
     AproposComponent,
     FlightdepartureComponent
   ],
