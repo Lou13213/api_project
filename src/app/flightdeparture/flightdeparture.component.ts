@@ -47,7 +47,7 @@ export class FlightdepartureComponent implements OnInit {
       searchAirlines: this.searchCtrlAirlines,
     });
   }
-
+  //fonction qui permet de récupérer les données de l'API et de les stocker dans flight
   ngOnInit(): void {
     this.dataservice
       .flightdeparture()
