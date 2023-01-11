@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AUPHAN_BOISSON_GALLET_VELLY_AVIATION';
+  title = 'Aeroport Nice cote d Azur';
 }

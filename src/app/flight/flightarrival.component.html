@@ -1,46 +1,46 @@
 <div class="hero">
   <div class="hero__breadcrumb">
     <section class="container2">
-<div class="h1">Live flights</div>
-<div class="h2">Arrivals Nice</div>
-</section>
-</div>
+      <div class="h1">Live flights</div>
+      <div class="h2">Arrivals Nice</div>
+    </section>
+  </div>
 </div>
 <form class="formular" [formGroup]="searchForm">
-  <h1><img src="assets/loupe.png" width="35" height="35">   Arriving from</h1>
+  <h1><img src="assets/loupe.png" width="35" height="35"> Arriving from</h1>
   <input class="input2" formControlName="searchDeparture" placeholder="Departure">
   <input class="input2" formControlName="searchFlightnumber" placeholder="Flight Number">
   <input class="input2" formControlName="searchAirlines" placeholder="Airlines">
 </form>
 <div class="container">
-<div class="w3-padding general">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Flight number</th>
-        <th scope="col">From</th>
-        <th scope="col">Airline</th>
-        <th scope="col">Estimated arriving time</th>
-        <th scope="col">Terminal</th>
-        <th scope="col">Status</th>
-        <th scope="col">Live Track</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let flight of flights">
-        <td>{{flight.iata}}</td>
-        <td>{{flight.from}}</td>
-        <td>{{flight.airline}}</td>
-        <td>{{formatDate(flight.estimatedTimeArrival)}}</td>
-        <td>{{flight.terminal}}</td>
-        <td [ngClass]="{
+  <div class="w3-padding general">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Flight number</th>
+          <th scope="col">From</th>
+          <th scope="col">Airline</th>
+          <th scope="col">Estimated arriving time</th>
+          <th scope="col">Terminal</th>
+          <th scope="col">Status</th>
+          <th scope="col">Live Track</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flights">
+          <td>{{flight.iata}}</td>
+          <td>{{flight.from}}</td>
+          <td>{{flight.airline}}</td>
+          <td>{{formatDate(flight.estimatedTimeArrival)}}</td>
+          <td>{{flight.terminal}}</td>
+          <td [ngClass]="{
         'landed-status': flight.statut === 'landed',
         'active-status': flight.statut === 'active',
         'scheduled-status': flight.statut === 'scheduled',
         'cancelled-status': flight.statut === 'cancelled'}">{{flight.statut}}</td>
-        <td><button (click)="onTrackFlight(flight)">Live track</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+          <td><button (click)="onTrackFlight(flight)">Live track</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

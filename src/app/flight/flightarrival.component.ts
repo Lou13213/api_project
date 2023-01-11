@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -8,65 +15,75 @@ import { Flight } from '../flight.interface';
 @Component({
   selector: 'app-flight',
   templateUrl: './flightarrival.component.html',
-  styleUrls: ['./flightarrival.component.css']
+  styleUrls: ['./flightarrival.component.css'],
 })
 export class FlightComponent implements OnInit {
-
   flights: any[] = [];
-  @Output() eventOut = new EventEmitter<string>()
+  @Output() eventOut = new EventEmitter<string>();
   isHidden: boolean = false;
 
-  searchForm: UntypedFormGroup
-  searchCtrlDeparture: FormControl<string>
-  searchCtrlFlightnumber: FormControl<string>
-  searchCtrlAirlines: FormControl<string>
+  searchForm: UntypedFormGroup;
+  searchCtrlDeparture: FormControl<string>;
+  searchCtrlFlightnumber: FormControl<string>;
+  searchCtrlAirlines: FormControl<string>;
 
-
-  constructor(private router: Router, private dataservice:DataService) {
+  constructor(private router: Router, private dataservice: DataService) {
     this.searchCtrlDeparture = new FormControl('', {
       validators: [Validators.required],
-      nonNullable: true
+      nonNullable: true,
     });
     this.searchCtrlFlightnumber = new FormControl('', {
       validators: [Validators.required],
-      nonNullable: true
+      nonNullable: true,
     });
     this.searchCtrlAirlines = new FormControl('', {
       validators: [Validators.required],
-      nonNullable: true
+      nonNullable: true,
     });
 
-  this.searchForm = new UntypedFormGroup({
+    this.searchForm = new UntypedFormGroup({
       searchDeparture: this.searchCtrlDeparture,
       searchFlightnumber: this.searchCtrlFlightnumber,
-      searchAirlines: this.searchCtrlAirlines
-  })
-   }
-
-  ngOnInit(): void {
-    this.dataservice.flightarrival().subscribe(data=>this.flights=data)
-    this.searchCtrlDeparture.valueChanges.pipe(
-      switchMap( (value: string) =>  this.dataservice.GetFlightsFromDeparture(value))
-      ).subscribe((data: Flight[]) => this.flights=data)
-
-    this.dataservice.flightarrival().subscribe(data=>this.flights=data)
-    this.searchCtrlFlightnumber.valueChanges.pipe(
-      switchMap( (value: string) =>  this.dataservice.GetFlightsFromFlightnumber(value))
-      ).subscribe((data: Flight[]) => this.flights=data)
-
-    this.dataservice.flightarrival().subscribe(data=>this.flights=data)
-    this.searchCtrlAirlines.valueChanges.pipe(
-      switchMap( (value: string) =>  this.dataservice.GetFlightsFromAirlines(value))
-      ).subscribe((data: Flight[]) => this.flights=data)
+      searchAirlines: this.searchCtrlAirlines,
+    });
   }
 
+  ngOnInit(): void {
+    this.dataservice.flightarrival().subscribe((data) => (this.flights = data));
+    this.searchCtrlDeparture.valueChanges
+      .pipe(
+        switchMap((value: string) =>
+          this.dataservice.GetFlightsFromDeparture(value)
+        )
+      )
+      .subscribe((data: Flight[]) => (this.flights = data));
+
+    this.dataservice.flightarrival().subscribe((data) => (this.flights = data));
+    this.searchCtrlFlightnumber.valueChanges
+      .pipe(
+        switchMap((value: string) =>
+          this.dataservice.GetFlightsFromFlightnumber(value)
+        )
+      )
+      .subscribe((data: Flight[]) => (this.flights = data));
+
+    this.dataservice.flightarrival().subscribe((data) => (this.flights = data));
+    this.searchCtrlAirlines.valueChanges
+      .pipe(
+        switchMap((value: string) =>
+          this.dataservice.GetFlightsFromAirlines(value)
+        )
+      )
+      .subscribe((data: Flight[]) => (this.flights = data));
+  }
+  //fonction qui permet de rediriger vers le site externe avec la map
   onTrackFlight(flight: any) {
     console.log('Tracking flight', flight);
     const url = `https://flightaware.com/live/flight/${flight.icao}`;
     window.open(url, '_blank');
     console.log('Finished tracking flight');
   }
-
+  //fonction qui permet de convertir le format de la date de l'API
   formatDate(estimatedTimeArrival: any) {
     const date = new Date(estimatedTimeArrival);
     const hours = date.getHours();
@@ -88,14 +105,12 @@ export class FlightComponent implements OnInit {
 
     return output;
   }
+  //fonction qui trie un tableau d'objets Flight selon leur statut.
   sortFlights() {
-
-  function compareFlights(a: Flight, b: Flight) {
-    const order = ['landed', 'active', 'scheduled'];
-    return order.indexOf(a.statut) - order.indexOf(b.statut);
+    function compareFlights(a: Flight, b: Flight) {
+      const order = ['landed', 'active', 'scheduled'];
+      return order.indexOf(a.statut) - order.indexOf(b.statut);
+    }
+    this.flights.sort(compareFlights);
   }
-  this.flights.sort(compareFlights);
 }
-}
-
-
